@@ -1,6 +1,6 @@
 @echo off
 
-set VERSION=.\tools\version.txt
+set VERSION=..\tools\version.txt
 
 if not exist %VERSION% >%VERSION% echo 0
 

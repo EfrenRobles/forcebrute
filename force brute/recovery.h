@@ -13,23 +13,13 @@ class recovery : public global
 		~recovery();
 	
 		void start(void);
-
+	
 	private:
-		const char* clave = "OXXO";
 
-		string result = "";
+		string generator(unsigned char lengthChar, string password);
+		bool sigue;
+		string store;
 
-
-		unsigned __int64 contador = 0;
-		bool sigue = true;
-		byte len = 0;
-		string store = "";
-
-		string incrementalNumber(const char* buffer);
-		string nextNumber(string password);
-
-
-
-
+		
 };
 
