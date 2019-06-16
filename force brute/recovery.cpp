@@ -4,54 +4,107 @@
 
 recovery::recovery()
 {
-	store = "";
-	store += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	//store += "abcdefghijklmnopqrstuvwxyz";
-	//store += "0123456789";
-	//store += "!#$%&()*+,-./:;<=>?@[]^{|}~ `\"\\'";
+	base = "";
+	//base += "0123456789";
+	base += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	base += "abcdefghijklmnopqrstuvwxyz";
+	//base += "!#$%&()*+,-./:;<=>?@[]^{|}~ `\"\\'";
 
 	sigue = true;
+	//store = "";
 }
 
 
 recovery::~recovery()
 {
-	store = "";
+	base = "";
+	sigue = false;
 }
 
 void recovery::start(void)
 {
-	unsigned char lengthChar = 1;
-
-	while (sigue) {
-		generator(lengthChar, "");
-		lengthChar++;
+	string password = init_generator();
+	
+	while (sigue && password != "oXXo") {
+		password = generator(password);
 	}
+	printf("\nThe password is: %s" , password.c_str());
+	getch();
 
 }
 
+string recovery::init_generator(void)
+{
+	printf("Searching: ");
+	string password = "";
+	password += base[0];
+	//password += "999";
+	return password;
+}
+
+string recovery::generator(string password)
+{
+	size_t len = password.length();
+
+	bool result = false;
+	do {
+		len--;
+		char temp = password[len];
+		result = next_character(temp);
+		password.replace(len, 1, 1, temp);  
+	} while (result && len > 0);
+
+
+	if (result) {
+		password = base[0] + password;
+	}
+
+	return password;
+
+}
+
+bool recovery::next_character(char& datum)
+{
+	size_t i = 0;
+	size_t len = base.length() - 1;
+
+	while(i < len) {
+		if (base[i] != datum) {
+			i++;
+			continue;
+		}
+		datum = base[i + 1];
+		return false;
+	}
+	datum = base[0];
+	return true;
+}
+
+/*
 string recovery::generator(unsigned char lengthChar, string password)
 {
+	string clave;
 	if (lengthChar == 0) {
 
 		if (password == "OXXO") {
-			cout << "password is:" << password << "\n";
+			printf("\nThe password is: %s" , password.c_str());
 			sigue = false;
-			cin;
+			getch();
+			exit(0);
 		}
 
 		return password;
 	}
 
 	size_t i = 0;
-	size_t j = store.length();
+	size_t j = base.length();
 
 	while (i < j && sigue) {
-		string buffer = password + store[i];
-		generator(lengthChar - 1, buffer);
-		cout << "\rsearching: " << password;
+		string buffer = password + base[i];
+		clave = generator(lengthChar - 1, buffer);
 		i++;
 	}
 
-	return password;
+	return clave;
 }
+*/
