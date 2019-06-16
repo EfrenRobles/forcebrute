@@ -18,7 +18,6 @@ class recovery
 	
 	private:
 
-		//string generator(unsigned char lengthChar, string password);
 		string generator(string password);
 		string init_generator(void);
 		bool next_character(char& datum);
