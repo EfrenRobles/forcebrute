@@ -1,10 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 #include <conio.h>
 
-using namespace std;
+#include "Control.h"
 
 class recovery
 {
@@ -13,19 +12,9 @@ class recovery
 		~recovery();
 	
 		void start(void);
-
-		typedef unsigned char byte;
 	
 	private:
-
-		string generator(string password);
-		string init_generator(void);
-		bool next_character(char& datum);
-
-		bool sigue;
-		string base;
-
-
-		
+		Control ctrl;
+	
 };
 
