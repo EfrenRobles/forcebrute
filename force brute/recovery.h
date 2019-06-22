@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <conio.h>
-
 #include "Control.h"
 
 class recovery
@@ -12,9 +11,12 @@ class recovery
 		~recovery();
 	
 		void start(void);
+
+	protected:
 	
 	private:
 		Control ctrl;
+
 	
 };
 

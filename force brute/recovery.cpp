@@ -13,12 +13,15 @@ recovery::~recovery()
 
 void recovery::start(void)
 {
-	char* pass = "9";
+	char* pass = "";
 
-	while(true) {
-		pass = ctrl.next(pass);
-		printf("\nThe password is: %s" , pass);
-	}
+	pass = ctrl.generator(pass);
+
+
+//	while(true) {
+//		pass = ctrl.next(pass);
+//		printf("\nThe password is: %s" , pass);
+//	}
 
 	_getch();
 }
